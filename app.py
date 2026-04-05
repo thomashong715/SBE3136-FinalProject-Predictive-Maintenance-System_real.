@@ -2,7 +2,7 @@ import sys, os
 
 # Ensure pages_code is importable on Streamlit Cloud
 ROOT = os.path.dirname(os.path.abspath(__file__))
-PAGES = os.path.join(ROOT, "pages_code")
+PAGES = os.path.join(ROOT, "page_code")
 for p in [ROOT, PAGES]:
     if p not in sys.path:
         sys.path.insert(0, p)
@@ -54,6 +54,6 @@ st.sidebar.caption("HVAC · Elevator · AutoML")
 
 # Route using importlib — works reliably on Streamlit Cloud
 page = st.session_state.page
-mod = importlib.import_module(page)
-importlib.reload(mod)
+
+mod = importlib.import_module(f"page_code.{page}")
 mod.show()
